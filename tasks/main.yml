@@ -10,4 +10,5 @@
 
 - include: webconfigurationproperty.yml
   with_items:
-    - {{ iis_custom_headers | default([]) }}
+  - "{{ iis_custom_headers | default(omit) }}"
+  when: iis_custom_headers is defined
