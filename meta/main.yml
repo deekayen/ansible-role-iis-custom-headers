@@ -1,6 +1,6 @@
 galaxy_info:
   author: David Norman
-  description: Add or remove custom headers from IIS web sites on Microsoft Windows Server.
+  description: Add or remove global, custom headers from IIS web sites on Microsoft Windows.
   license: BSD
   min_ansible_version: 2.2
   github_branch: master
