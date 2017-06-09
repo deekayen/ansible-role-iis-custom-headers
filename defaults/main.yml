@@ -1,0 +1,8 @@
+---
+
+iis_custom_headers:
+  - { name: "X-Frame-Options", value: "SAMEORIGIN", status: "present" }
+  - { name: "X-Powered-By", value: "ASP", status: "absent" }
+  - { name: "X-Powered-By", value: "ASP.NET", status: "absent" }
+
+iis_custom_headers_restart_iis: True

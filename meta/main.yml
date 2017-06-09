@@ -1,0 +1,16 @@
+galaxy_info:
+  author: David Norman
+  description: Add or remove custom headers from IIS web sites on Microsoft Windows Server.
+  license: BSD
+  min_ansible_version: 2.2
+  github_branch: master
+  platforms:
+  - name: Windows
+    versions:
+    - all
+  galaxy_tags:
+  - windows
+  - iis
+  - security
+
+dependencies: []

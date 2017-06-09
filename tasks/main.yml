@@ -1,0 +1,13 @@
+---
+
+- name: "Check existing global customHeaders."
+  win_shell: "Get-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter 'system.webServer/httpProtocol/customHeaders' -name ."
+  register: iis_custom_headers_properties
+
+- debug:
+    var: iis_custom_headers_properties
+    verbosity: 1
+
+- include: webconfigurationproperty.yml
+  with_items:
+    - {{ iis_custom_headers | default([]) }}

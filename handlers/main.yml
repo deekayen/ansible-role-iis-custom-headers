@@ -1,0 +1,7 @@
+---
+
+- name: restart iis
+  win_service:
+    name: W3SVC
+    state: restarted
+  when: iis_custom_headers_restart_iis | bool
