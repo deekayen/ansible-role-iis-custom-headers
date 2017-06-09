@@ -7,7 +7,7 @@ galaxy_info:
   platforms:
   - name: Windows
     versions:
-    - all
+    - 2012R2
   galaxy_tags:
   - windows
   - iis
