@@ -11,9 +11,9 @@ The `iis_custom_headers` default variable defines which key and value to set for
 By default, Ansible will restart IIS at the end of the tasks because it usually assumes the `win_shell` execution results in a change; toggle `iis_custom_headers_restart_iis` to prevent the IIS restart.
 
     iis_custom_headers:
-      - { name: "X-Frame-Options", value: "SAMEORIGIN", status: "present" }
-      - { name: "X-Powered-By", value: "ASP", status: "absent" }
-      - { name: "X-Powered-By", value: "ASP.NET", status: "absent" }
+      - { name: "X-Frame-Options", value: "SAMEORIGIN", state: "present" }
+      - { name: "X-Powered-By", value: "ASP", state: "absent" }
+      - { name: "X-Powered-By", value: "ASP.NET", state: "absent" }
 
     iis_custom_headers_restart_iis: True
 

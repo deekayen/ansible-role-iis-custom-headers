@@ -1,17 +1,34 @@
 ---
 
-# Attempted duplicate entries will cause this sort of error:
-# Error: Cannot add duplicate collection entry of type 'add' with unique key attribute 'name' set to 'X-Frame-Options'
-- name: "Add {{ item.name }} custom header."
-  win_shell: "Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter 'system.webServer/httpProtocol/customHeaders' -name . -value @{name='{{ item.name }}';value='{{ item.value }}'}"
-  ignore_errors: True
-  notify: restart iis
-  when: item.state == "present"
+# Doing these in blocks is a bit less noisy on the output.
 
-# Attempted removal of non-existent keys will cause this sort of error:
-# WARNING: Property . is not found on /system.webServer/httpProtocol/customHeaders at index @{name="X-Frame-Options"}.
-- name: "Remove {{ item.name }} custom header."
-  win_shell: "Remove-WebConfigurationProperty -PSPath 'MACHINE/WEBROOT/APPHOST' -Filter 'system.webServer/httpProtocol/customHeaders' -name . -AtElement @{name='{{ item.name }}';value='{{ item.value }}'}"
-  ignore_errors: True
-  notify: restart iis
-  when: item.state == "absent"
+- block:
+  # Attempted duplicate entries will cause this sort of error:
+  # Error: Cannot add duplicate collection entry of type 'add' with unique key attribute 'name' set to 'X-Frame-Options'
+  - name: "Add {{ item.name }} custom header."
+    win_shell: "Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter 'system.webServer/httpProtocol/customHeaders' -name . -value @{name='{{ item.name }}';value='{{ item.value }}'}"
+    ignore_errors: True
+    notify: restart iis
+
+  when:
+    - item.name is defined
+    - item.value is defined
+    - item.state is defined
+    - item.state == "present"
+
+- block:
+  # Attempted removal of non-existent keys warns:
+  # WARNING: Property . is not found on /system.webServer/httpProtocol/customHeaders at index @{name="X-Frame-Options"}.
+
+  # Removing a property where only the key OR value matches throws a warning:
+  # WARNING: Property . is not found on /system.webServer/httpProtocol/customHeaders at index @{value="DENY";name="X-Frame-Options"}.
+  - name: "Remove {{ item.name }} custom header."
+    win_shell: "Remove-WebConfigurationProperty -PSPath 'MACHINE/WEBROOT/APPHOST' -Filter 'system.webServer/httpProtocol/customHeaders' -name . -AtElement @{name='{{ item.name }}';value='{{ item.value }}'}"
+    ignore_errors: True
+    notify: restart iis
+
+  when:
+    - item.name is defined
+    - item.value is defined
+    - item.state is defined
+    - item.state == "absent"
