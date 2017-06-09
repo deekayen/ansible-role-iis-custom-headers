@@ -30,6 +30,20 @@ The tasks rely on using Powershell's web server (IIS) administration cmdlets [Ad
              - { name: "X-Frame-Options", value: "SAMEORIGIN", status: "present" }
              - { name: "X-Powered-By", value: "ASP.NET", status: "absent" }
 
+The result will add [customHeaders](https://www.iis.net/configreference/system.webserver/httpprotocol/customheaders) elements to the global XML configuration:
+
+    <configuration>
+       <system.webServer>
+          <httpProtocol>
+             <customHeaders>
+                <add name="Strict-Transport-Security" value="max-age=31536000" />
+                <add name="X-Frame-Options" value="SAMEORIGIN" />
+             </customHeaders>
+          </httpProtocol>
+       </system.webServer>
+    </configuration>
+
+
 Requirements
 ------------
 
