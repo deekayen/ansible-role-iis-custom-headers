@@ -3,6 +3,7 @@
 - name: "Check existing global customHeaders."
   win_shell: "Get-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter 'system.webServer/httpProtocol/customHeaders' -name ."
   register: iis_custom_headers_properties
+  changed_when: False
 
 - debug:
     var: iis_custom_headers_properties
