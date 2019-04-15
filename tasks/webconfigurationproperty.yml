@@ -15,7 +15,11 @@
 # Attempted duplicate entries will cause this sort of error:
 # Error: Cannot add duplicate collection entry of type 'add' with unique key attribute 'name' set to 'X-Frame-Options'
 - name: "Add {{ item.name }} custom header."
-  win_shell: "Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST' -filter 'system.webServer/httpProtocol/customHeaders' -name . -value @{name='{{ item.name }}';value='{{ item.value }}'}"
+  win_shell: "Add-WebConfigurationProperty \
+  -pspath 'MACHINE/WEBROOT/APPHOST' \
+  -filter 'system.webServer/httpProtocol/customHeaders' \
+  -name . \
+  -value @{name='{{ item.name }}';value='{{ item.value }}'}"
   notify: restart iis
   register: iis_custom_headers_add
   changed_when:
@@ -41,7 +45,11 @@
 # Removing a property where only the key OR value matches throws a warning:
 # WARNING: Property . is not found on /system.webServer/httpProtocol/customHeaders at index @{value="DENY";name="X-Frame-Options"}.
 - name: "Remove {{ item.name }} custom header."
-  win_shell: "Remove-WebConfigurationProperty -PSPath 'MACHINE/WEBROOT/APPHOST' -Filter 'system.webServer/httpProtocol/customHeaders' -name . -AtElement @{name='{{ item.name }}';value='{{ item.value }}'}"
+  win_shell: "Remove-WebConfigurationProperty \
+  -PSPath 'MACHINE/WEBROOT/APPHOST' \
+  -Filter 'system.webServer/httpProtocol/customHeaders' \
+  -name . \
+  -AtElement @{name='{{ item.name }}';value='{{ item.value }}'}"
   ignore_errors: True
   notify: restart iis
   register: iis_custom_headers_remove
