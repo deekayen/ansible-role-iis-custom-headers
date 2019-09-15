@@ -20,10 +20,10 @@
   register: iis_custom_headers_add
   changed_when:
     - iis_custom_headers_add.stderr is defined
-    - iis_custom_headers_add.stderr == ''
+    - iis_custom_headers_add.stderr | length == 0
   failed_when:
     - iis_custom_headers_add.stderr is defined
-    - not iis_custom_headers_add.stderr == ''
+    - iis_custom_headers_add.stderr | length > 0
     - not 'Cannot add duplicate collection entry' in iis_custom_headers_add.stderr
   when:
     - item.name is defined
