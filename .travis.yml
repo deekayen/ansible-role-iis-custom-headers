@@ -1,6 +1,6 @@
 ---
 
-dist: xenial
+dist: bionic
 language: python
 
 addons:
@@ -10,15 +10,12 @@ addons:
 
 install:
   - pip install ansible-lint
-  - pip install ansible-review
 
 before_script:
   - ansible-lint --version
-  - ansible-review --version
 
 script:
-  - git ls-files | grep -Ei '^[^[:punct:]].+.(yaml|yml)$' | xargs ansible-lint
-  - git ls-files | grep -Ei '^[^[:punct:]].+.(yaml|yml)$' | xargs ansible-review -q
+  - ansible-lint .
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
