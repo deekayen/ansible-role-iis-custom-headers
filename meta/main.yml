@@ -1,4 +1,7 @@
+---
+
 galaxy_info:
+  role_name: iis_custom_headers
   author: David Norman
   description: Add or remove global, custom headers from IIS web sites on Microsoft Windows.
   license: BSD
