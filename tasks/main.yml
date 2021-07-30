@@ -6,13 +6,15 @@
   -filter 'system.webServer/httpProtocol/customHeaders' \
   -name ."
   register: iis_custom_headers_properties
-  changed_when: False
+  changed_when: false
 
-- debug:
+- name: "Debug: show existing custom headers."
+  debug:
     var: iis_custom_headers_properties
     verbosity: 1
 
-- include: webconfigurationproperty.yml
+- name: Include web configration property tasks.
+  include: webconfigurationproperty.yml
   with_items:
-  - "{{ iis_custom_headers | default(omit) }}"
+    - "{{ iis_custom_headers | default(omit) }}"
   when: iis_custom_headers is defined

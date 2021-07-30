@@ -1,0 +1,7 @@
+---
+
+- hosts: localhost
+  remote_user: root
+
+  roles:
+    - deekayen.iis_custom_headers

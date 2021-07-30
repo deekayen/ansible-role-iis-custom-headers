@@ -1,6 +1,8 @@
 IIS Custom Headers
 ==================
 
+[![CI](https://github.com/deekayen/ansible-role-iis-custom-headers/actions/workflows/ci.yml/badge.svg)](https://github.com/deekayen/ansible-role-iis-custom-headers/actions/workflows/ci.yml) [![Platforms](http://img.shields.io/badge/platforms-windows-lightgrey.svg?style=flat)](#) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+
 Add or remove global, custom HTTP headers from IIS web sites on Microsoft Windows Server.
 
 Role Variables
